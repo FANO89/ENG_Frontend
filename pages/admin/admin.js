@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -9,7 +9,7 @@ export default function Admin() {
 
   // ดึงข้อมูลข่าวทั้งหมด
   useEffect(() => {
-    fetch("http://localhost:5000/news")
+    fetch(`${API_URL}/news`)
       .then((res) => res.json())
       .then((data) => setNews(data));
   }, []);
@@ -20,8 +20,8 @@ export default function Admin() {
 
     const method = editId ? "PUT" : "POST";
     const url = editId
-      ? `http://localhost:5000/news/${editId}`
-      : "http://localhost:5000/news";
+      ? `${API_URL}/news/${editId}`
+      : `${API_URL}/news`;
 
     const response = await fetch(url, {
       method: method,
@@ -44,7 +44,7 @@ export default function Admin() {
 
   // ดึงข่าวจาก API
   const fetchNews = async () => {
-    const res = await fetch("http://localhost:5000/news");
+    const res = await fetch(`${API_URL}/news`);
     const data = await res.json();
     setNews(data);
   };
@@ -58,7 +58,7 @@ export default function Admin() {
 
   // ลบข่าว
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:5000/news/${id}`, {
+    const response = await fetch(`${API_URL}/news/${id}`, {
       method: "DELETE",
     });
 
