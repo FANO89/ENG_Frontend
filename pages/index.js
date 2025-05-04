@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/news")
+    fetch("%{API_URL}/news")
       .then((res) => res.json())
       .then((data) => setNews(data));
   }, []);
