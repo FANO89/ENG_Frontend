@@ -5,7 +5,7 @@ export default function Home() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch('${API_URL}/news')
+    fetch(`${API_URL}/news`)
       .then((res) => res.json())
       .then((data) => setNews(data));
   }, []);
